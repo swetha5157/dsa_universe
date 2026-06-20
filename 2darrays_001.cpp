@@ -88,9 +88,61 @@ int minRow(vector<vector<int>> &mat)
         }
     }
     return ind;
+
+    /*
+    Let's analyze it carefully.
+
+Your current solution:
+
+for each row
+    count number of 1s
+
+Time Complexity:
+
+Rows = R
+Cols = C
+
+TC = O(R * C)
+SC = O(1)
+If you sort each row first
+
+Suppose each row has C elements.
+
+Sorting one row:
+
+O(C log C)
+
+Sorting all R rows:
+
+O(R * C log C)
+
+After sorting, you can find the first 1 using binary search:
+
+lower_bound(row.begin(), row.end(), 1);
+
+Per row:
+
+O(log C)
+
+For all rows:
+
+O(R log C)
+
+Total:
+
+O(R * C log C + R log C)
+≈ O(R * C log C)
+Comparison
+Method	Time Complexity
+Direct counting	O(R × C)
+Sort + Binary Search	O(R × C log C)
+
+So sorting actually makes it worse.
+    
+    */
 }
 
-// if the matrix is sorted row-wise and column-wise, we can use binary search to find the first occurrence of 1 in each row, tc: O(nlogm), sc: O(1)
+// if the matrix is already sorted row-wise and column-wise, we can use binary search to find the first occurrence of 1 in each row, tc: O(nlogm), sc: O(1)
 
 /*
 Function	Returns
@@ -243,7 +295,7 @@ vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
     }
 
 
-// return index of max 1s in a row in a binary matrix, tc: O(n+m), sc: O(1)
+// return index of max 1s in a row in a binary matrix, tc: O(rlogc), sc: O(1)
 //indexing is 0 based
 int maxRow(vector<vector<int>>& arr) {
      int r=arr.size();int c=arr[0].size();
