@@ -136,7 +136,19 @@ bool isPerfect(int n){
     return sum==n;
 }
 
+// find min angle between hour and minute hand of a clock
+// given 12 hour format
+double angleClock(int hour, int minutes) {
+        // if 24 hour format is given, we can take hour = hour%12 to convert it to 12 hour format, rest all same
 
+        double ha= (hour*30.0)+(minutes*0.5); // 30 degrees per hour + 0.5 degrees per minute
+        double ma=minutes*6.0;// 6 degrees per minute
+
+        double diff= abs(ha-ma);
+
+        return min(diff, 360.0-diff);
+
+}
 
 int main(){
     cout<< "===== Single Number "<< endl;
@@ -195,6 +207,11 @@ int main(){
     } else {
         cout << perfectNum << " is not a perfect number." << endl;
     }
+  
+  
+    cout<< "===== Clock Angle "<< endl;
+    int hour = 3, minutes = 30;
+    cout << "Angle between hour and minute hand at " << hour << ":" << minutes << " is: " << angleClock(hour, minutes) << " degrees." << endl;
     return 0;
 
 }
