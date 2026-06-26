@@ -170,7 +170,36 @@ int findKthPositiveOptimal(vector<int>& arr, int k) {
 
         return k+h+1; //l=h+1
     }
-int main(){
+
+// nth root of a number
+// return 1 if ==m 
+    //return 0 if <m
+    //return 2 if>m
+    int f(int mid,int n,int m){
+        long long ans=1;
+        for(int i=1;i<=n;i++){
+            ans=ans*mid;
+            if(ans>m) return 2;
+        }
+        if(ans==m) return 1;
+        return 0;
+    }
+    int nthRoot(int n, int m) {
+        if(m==0) return 0;
+        int l=1,h=m;
+        while(l<=h){
+            int mid=(l+h)/2;
+            int ans=f(mid,n,m);
+            if(ans==1) return mid;
+            else if(ans==0) l=mid+1;
+            else h=mid-1;
+        }
+        return -1;
+    } //tc: O(n*log m) , n for the power loop  and log m for binary searchsc: O(1)
+
+
+
+    int main(){
 
     // ---< Koko eating bananas >---
     int n;
